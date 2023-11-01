@@ -1,0 +1,36 @@
+service: serverlesss-analysis
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: clara
+  region: eu-north-1
+  iam:
+    role: arn:aws:iam::612486395832:role/lectures-cloud
+
+plugins:
+  - serverless-webpack
+
+package:
+  individually: true
+
+functions:
+  getWordCount:
+    handler: functions/getWordCount/index.handler
+    events:
+      - httpApi:
+          path: '/getWords'
+          method: POST
+  getWordList:
+    handler: functions/getWordList/index.handler
+    events:
+      - httpApi:
+          path: '/getList'
+          method: POST
+  returnSummary:
+    handler: functions/returnSummary/index.handler
+    events:
+      - httpApi:
+          path: '/returnSummary'
+          method: POST
