@@ -8,16 +8,17 @@ exports.handler = async (event, context) => {
   const words = body.message
     .toLowerCase()
     .replace(/[^\w\såäöÅÄÖ]/g, '')
+    .trim()
     .split(/\s+/);
 
   words.forEach((word) => {
-    if (word !== '') {
-      if (word in wordCounts) {
-        wordCounts[word]++;
-      } else {
-        wordCounts[word] = 1;
-      }
+    //  if (word !== '') {
+    if (word in wordCounts) {
+      wordCounts[word]++;
+    } else {
+      wordCounts[word] = 1;
     }
+    //  }
   });
 
   const wordList = Object.entries(wordCounts).map(([word, count]) => ({
