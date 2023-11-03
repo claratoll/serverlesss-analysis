@@ -11,10 +11,12 @@ exports.handler = async (event, context) => {
     .split(/\s+/);
 
   words.forEach((word) => {
-    if (word in wordCounts) {
-      wordCounts[word]++;
-    } else {
-      wordCounts[word] = 1;
+    if (word !== '') {
+      if (word in wordCounts) {
+        wordCounts[word]++;
+      } else {
+        wordCounts[word] = 1;
+      }
     }
   });
 
